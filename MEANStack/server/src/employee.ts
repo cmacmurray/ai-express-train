@@ -5,3 +5,4 @@ export interface Employee {
     position: string;
     level: "junior" | "mid" | "senior";
     _id?: mongodb.ObjectID;
+}
