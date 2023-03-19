@@ -40,3 +40,16 @@ async function applySchemaValidation(db: mongodb.Db) {
         }
     },
 };
+
+await db.command({
+    collMod: "employees",
+    validator: jsonSchema,
+    validationLevel: "strict",
+}).catch(async (error: mongodb.MongoServerError) => {
+    if(error.codeName === 'NamespaceNotFound') {
+        await db.createCollection("employees", {
+            validator: jsonSchema,
+            validationLevel: "strict",
+        });
+    }
+}
