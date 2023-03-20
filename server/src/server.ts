@@ -3,6 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import { connectToDatabase } from './database';
 import { error } from 'console';
+import { employeeRouter } from './employee.routes';
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ connectToDatabase(ATLAS_URI)
        app.use(cors());
  
        // start the Express server
+       app.use("/employees", employeeRouter); 
        app.listen(5200, () => {
            console.log(`Server running at http://localhost:5200...`);
        });
